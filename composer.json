@@ -1,11 +1,26 @@
 {
     "name": "keremardicli/php-tatr",
-    "description": "Task Tracker — git-friendly, file-based task management - PHP implementation of @tsoding tatr: https://github.com/tsoding/tatr",
+    "description": "Task Tracker — git-friendly, file-based task management. PHP implementation of tsoding/tatr.",
     "type": "library",
     "license": "GPL-2.0-only",
+    "keywords": ["task", "tracker", "cli", "git", "tql"],
+    "homepage": "https://github.com/KeremArdicli/php-tatr",
+    "authors": [
+        {
+            "name": "Kerem Ardicli",
+            "email": "keremardicli@gmail.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/KeremArdicli/php-tatr/issues",
+        "source": "https://github.com/KeremArdicli/php-tatr"
+    },
     "bin": ["bin/tatr"],
     "autoload": {
         "psr-4": { "PhpTatr\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "PhpTatr\\Tests\\": "tests/" }
     },
     "require": {
         "php": ">=8.2"

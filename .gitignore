@@ -1,1 +1,5 @@
-/PLAN.md
+/*.md
+/.claude
+/vendor
+/.phpunit.result.cache
+/composer.lock

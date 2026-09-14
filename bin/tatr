@@ -1,0 +1,44 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+require __DIR__ . '/../vendor/autoload.php';
+
+use PhpTatr\Command\FindCommand;
+use PhpTatr\Command\GraphCommand;
+use PhpTatr\Command\HelpCommand;
+use PhpTatr\Command\InitCommand;
+use PhpTatr\Command\LsCommand;
+use PhpTatr\Command\NewCommand;
+use PhpTatr\Command\RefCommand;
+use PhpTatr\Command\SummaryCommand;
+use PhpTatr\Command\UntagCommand;
+use PhpTatr\Command\VersionCommand;
+
+$argv = $_SERVER['argv'];
+array_shift($argv);
+
+$command = array_shift($argv) ?? 'help';
+$rest = $argv;
+
+$exitCode = match ($command) {
+    'init' => (new InitCommand())->run($rest),
+    'new' => (new NewCommand())->run($rest),
+    'ls' => (new LsCommand())->run($rest),
+    'find' => (new FindCommand())->run($rest),
+    'summary' => (new SummaryCommand())->run($rest),
+    'ref' => (new RefCommand())->run($rest),
+    'untag' => (new UntagCommand())->run($rest),
+    'graph' => (new GraphCommand())->run($rest),
+    'version' => (new VersionCommand())->run($rest),
+    'help', '-help', '--help' => (new HelpCommand())->run($rest),
+    default => (function () use ($command): int {
+        fwrite(STDERR, "Unknown command: {$command}\n");
+        (new HelpCommand())->run([]);
+
+        return 1;
+    })(),
+};
+
+exit($exitCode);
