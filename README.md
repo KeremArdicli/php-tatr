@@ -29,10 +29,10 @@ cd my-project
 composer init --no-interaction
 ```
 
-Then install php-tatr as a dependency:
+Then install php-tatr as a **dev dependency** — it's a workflow tool you run from the terminal, not something your application's code calls at runtime, so it belongs alongside things like PHPUnit rather than in production:
 
 ```bash
-composer require keremardicli/php-tatr
+composer require --dev keremardicli/php-tatr
 ```
 
 This downloads the tool into your project's `vendor/` folder and creates a `vendor/bin/tatr` command you can run.
