@@ -1,4 +1,5 @@
 /*.md
+!/README.md
 /.claude
 /vendor
 /.phpunit.result.cache
