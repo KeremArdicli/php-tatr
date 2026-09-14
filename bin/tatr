@@ -3,7 +3,28 @@
 
 declare(strict_types=1);
 
-require __DIR__ . '/../vendor/autoload.php';
+$autoloadCandidates = [
+    __DIR__ . '/../vendor/autoload.php',   // running from a source checkout of php-tatr itself
+    __DIR__ . '/../../../autoload.php',    // installed as a dependency in vendor/keremardicli/php-tatr
+];
+
+$autoloadFile = null;
+
+foreach ($autoloadCandidates as $candidate) {
+    if (file_exists($candidate)) {
+        $autoloadFile = $candidate;
+
+        break;
+    }
+}
+
+if ($autoloadFile === null) {
+    fwrite(STDERR, "Unable to find Composer autoload.php, did you run \"composer install\"?\n");
+
+    exit(1);
+}
+
+require $autoloadFile;
 
 use PhpTatr\Command\FindCommand;
 use PhpTatr\Command\GraphCommand;
